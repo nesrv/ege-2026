@@ -12,18 +12,15 @@ s = open("24-actual/demo_2025_24.txt").read()
 
 # pattern = r'(?:0|[1-9][0-9]*)(?:[-*](?:0|[1-9][0-9]*))*'
 # pattern = r'\d+(?:[-*]\d+)*'
-pattern = r'(?:0|[1-9]\d*)(?:[-*](?:0|[1-9]\d*))*'
+# # # pattern = r'[1-9][0-9]*([-*]+[1-9][0-9]*)*'
+
+# pattern = r'(?:0|[1-9]\d*)(?:[-*](?:0|[1-9]\d*))*'
 
 num = '(?:0|[1-9][0-9]*)'
 pattern = f'{num}(?:[-*]{num})*'
-
-
-
-
-# pattern = r'[1-9][0-9]*([-*]+[1-9][0-9]*)*'
 
 matches = findall(pattern, s)
 
 max_length = max(matches , key=len)
 
-print(len(max_length)  )
+print(len(max_length))
