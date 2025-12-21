@@ -13,7 +13,7 @@ for x in range(7_500_000, 7_501_000):
         if x%d == 0 and is_prime(d):
             divs.add(d)
     if divs and (min(divs) + max(divs)) % 100 == 32:
-        print(x)
+        print(x,d, max(divs), min(divs))
  
 
     
