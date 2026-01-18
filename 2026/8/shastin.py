@@ -19,3 +19,10 @@ for word in words:
     
 
 print(c)
+
+
+# for word in words:
+#     if word[0] != '0':
+#         count = sum(word[i] in '0246' and word[i + 1] in '135' for i in range(6))
+#         if count == 2:
+#             c += 1
