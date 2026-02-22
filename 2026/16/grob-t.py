@@ -5,15 +5,11 @@ small_n = 30
 F_small = [None] * (small_n + 1)
 
 # База
-for n in range(1, 4):
-    F_small[n] = n + 1
-
-# Заполняем для маленьких n
-for n in range(4, small_n + 1):
-    if n % 3 == 0:
-        if F_small[n - 3] is not None:
-            F_small[n] = F_small[n - 3] + n - 15
-    # для не кратных 3 не заполняем (они не определены)
+for n in range(1, small_n + 1):
+    if n <= 3:
+        F_small[n] = n + 1
+    elif n % 3 == 0:
+        F_small[n] = F_small[n - 3] + n - 15
 
 print("Значения для маленьких n (определены только n=1,2 и кратные 3):")
 for n in range(1, small_n + 1):
