@@ -20,17 +20,11 @@ for i in range(len(nums) - 1):
     a, b = nums[i], nums[i + 1]
     
     # Один положительный, один отрицательный
-    if not ((a > 0 and b < 0) or (a < 0 and b > 0)):
-        continue
-    
-    # |a - b| делится на neg_div3_count
-    if abs(a - b) % neg_div3_count != 0:
-        continue
-    
-    count += 1
-    s = a + b
-    if max_sum is None or s > max_sum:
-        max_sum = s
+    if ((a > 0 and b < 0) or (a < 0 and b > 0)) and abs(a - b) % neg_div3_count == 0:
+        count += 1
+        s = a + b
+        if max_sum is None or s > max_sum:
+            max_sum = s
 
 print(count, max_sum)
 
