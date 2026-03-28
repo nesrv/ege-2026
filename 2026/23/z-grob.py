@@ -14,27 +14,33 @@
 В качестве ответа укажите число возможных вариантов. В ответе укажите только число.
 
 '''
+
+# Идея: считаем рекурсией «сколько путей из (x,y) до (70,70)».
+# @lru_cache — чтобы одинаковые состояния не пересчитывать (как в разборе 23).
+
 from functools import lru_cache
 
-def is_magical(x, y):
-    return (x + y) % 2 == 0
+@lru_cache(maxsize=None)
+def puti(x, y, ost_mag, proverka):
 
-@lru_cache(None)
-def count(x, y, mag_left, passed):
-    # mag_left — сколько ещё магических точек можно посетить
-    # passed — прошли ли через (30,33)
     if x > 70 or y > 70:
         return 0
-    if is_magical(x, y):
-        if mag_left == 0:
+
+    # Магическая клетка: сумма координат чётная
+    if (x + y) % 2 == 0:
+        if ost_mag == 0:
             return 0
-        mag_left -= 1
+        ost_mag -= 1
+
     if x == 70 and y == 70:
-        return 1 if passed else 0
+        return 1 if proverka else 0
 
-    passed_new = passed or (x == 30 and y == 33)
-    return (count(x + 1, y, mag_left, passed_new) +
-            count(x, y + 1, mag_left, passed_new) +
-            count(x + 1, y + 1, mag_left, passed_new))
+    proverka = proverka or (x == 30 and y == 33)
 
-print(count(2, 5, 5, False))
+    return (puti(x + 1, y, ost_mag, proverka) +
+            puti(x, y + 1, ost_mag, proverka) +
+            puti(x + 1, y + 1, ost_mag, proverka))
+
+print(puti(2, 5, 5, False))
+
+# 28826083
