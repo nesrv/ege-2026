@@ -9,6 +9,34 @@
 
 --- На пальцах ---
 
-
+Сканируем подстроку слева направо: новое «слово» начинается с буквы, если перед ней в подстроке нет буквы (начало или после цифры). Два указателя l, r и счётчик слов; расширяем r, при cnt > 80 двигаем l и поправляем cnt за O(1). При cnt == 80 обновляем максимум длины; при равной длине — меньший индекс l.
 '''
-f = open(r"2026\24\24_24374.txt")
+
+from pathlib import Path
+
+TARGET = 80
+
+with open(Path(__file__).parent / '24_24374.txt') as f:
+    s = f.read()
+
+n = len(s)
+l = 0
+cnt = 0
+best_len = -1
+best_l = 0
+
+for r in range(n):
+    if s[r].isalpha() and (r == l or not s[r - 1].isalpha()):
+        cnt += 1
+    while cnt > TARGET:
+        if s[l].isalpha():
+            if not (l + 1 <= r and s[l + 1].isalpha()):
+                cnt -= 1
+        l += 1
+    if cnt == TARGET:
+        cur = r - l + 1
+        if cur > best_len or (cur == best_len and l < best_l):
+            best_len = cur
+            best_l = l
+
+print(best_l)
